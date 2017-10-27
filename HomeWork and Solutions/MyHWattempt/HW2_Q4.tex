@@ -1,0 +1,89 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm,listings,color, graphicx}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+\begin{document}
+
+\begin{text} 
+Davie Truong\\
+“I have read and agree to the collaboration policy. Davie Truong” \\
+Homework Heavy \\
+\end{text}
+
+
+\begin{center}
+{\bf\Large CMPS 102 --- Spring 2017 --  Homework 2}
+\end{center}
+
+\section*{Solution to Problem 4}
+
+\section*{Algorithm} 
+\begin{lstlisting}
+while(all towns have not been visited)
+	if(town is not within range of existing power plant)
+		build a power plant 20 miles down stream
+	else	// town is in range of a power plant
+		move on to next town
+\end{lstlisting}
+
+\begin{text} 
+Description:\\
+This algorithm utalises the max possible range of every power plant. By setting up the power plant the max distance away from a newly discovered town it gives the power plant the maximum radius to be effective this also keeping the number of power plants to a minimum.
+\end{text}
+
+\begin{proof}
+\begin{text}
+Proof of Correctness:\\
+The algorithm will terminate: The algorithm terminates after it has visited every town and since there is nothing to stop that from happening, the algorithm will be able to end.\\
+Greedy Algorithm is Optimal:\\
+Proof: Greedy stays ahead/Contradiction \\
+-Assume greedy is not optimal\\
+-Let $i_1, i_2,..., i_k$ denote the locations selected by greedy for power plant placements\\
+-Let $j_1,j_2,..., j_k$ denote the locations in the optimal solution for power plant placements\\
+-With $i_1  = j_1, i_2 = j_2, ..., i_r = j _r$ for the largest possible value of r. \\
+-Suppose $j_r+1$ is a town and a power plant is built less than 20 miles away from the town. If this were the case, then the power plant wouldn't be utalizing its maximum range, thus shorting the town that would have been in range down stream if the 20 miles were maximized and forcing another power plant to be built. Therefore this strategy would not result in the minimum number of power plants. \\
+-Suppose $j_r+1$ is a town and a power plant greater than 20 miles away from the town is built. This would result in the town not recieving power and therefore an invalid solution.\\
+-Thus the final option is to have $j_r+1$ build a power plan exactly 20 miles away. This would result in the town recieving power while being at the maximum range and offering a greater distance to be covered down stream for any town that is within the 40 miles. However, this final option is the greedy solution and therefore the greedy solution is the optimal solution.
+
+\end{text}
+\end{proof}
+
+\section*{Analysis}
+
+\begin{text}
+Time Complexity: \\
+O(n)\\
+-It would take n time because the algorithm must visit every town at most once to determine if the town needs power.\\
+-There is no reason to visit the town more than once because we only build power plants for towns that don't have energy and since it is 20 miles away and within range we know for certain it has power.
+\end{text}
+
+\begin{text}
+Space Complexity: \\
+O(n)\\
+-Worse case the towns are spread past 40 miles from each other thus resulting in each town needing its own power plant.
+\end{text}
+
+\end{document}
